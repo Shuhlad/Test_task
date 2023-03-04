@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using MVCApplication.Models.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connection = builder.Configuration.GetConnectionString("Connection");
+builder.Services.AddDbContext<MainContext>(o => o.UseNpgsql(connection));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
